@@ -1,26 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- ff9fbf7c-4fe6-4c64-8322-251ec3d6b4d3 -->
 
 <head>
-    <meta charset="utf-8" />
-    <title>Web API</title>
-    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+   <meta charset="utf-8" />
+   <title>ugh</title>
+   <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
+   <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css" />
+
+   <style>
+       /* .myheader grabbed from Bootstrap's jumbotron example - https://getbootstrap.com/docs/4.0/examples/jumbotron/ */
+       .myheader {
+           background-color: #e9ecef;
+           padding: 4rem 2rem;
+           margin-bottom: 2rem;
+       }
+
+       input.form-control {
+           display: inline-block;
+           width: 20rem;
+           margin-right: 1rem;
+       }
+
+       .search-row {
+           margin-bottom: 1rem;
+       }
+
+       .container {
+           margin: 0;
+       }
+
+       table {
+           border-collapse: collapse;
+           width: 100%;
+           margin: 2rem;
+       }
+
+       td,
+       th {
+           border: 1px solid gold;
+           text-align: left;
+           padding: 8px;
+       }
+
+       tr:nth-child(even) {
+           background-color: #dddddd;
+       }
+   </style>
 </head>
 
 <body>
-    <h1>Web API</h1>
-    <!--<div id="twitch-embed"></div>
-    <script src="https://embed.twitch.tv/embed/v1.js"></script>
+   <div id="app">
+       <div class="myheader">
+           <h1 class="display-5">{{title}}</h1>
+       </div>
 
-    <script type="text/javascript">
-        new Twitch.Embed("twitch-embed", {
-            width: 854,
-            height: 480,
-            channel: "monstercar"
-        });
-    </script>-->
+       <div class="container">
+           <div class="row search-row">
+               <div class="col-md-12">
+                   <div>
+                       Longititude:<input type="text" v-model="currentLat"><br>
+                       Lattitude:<input type="text" v-model="currentLong"><br>
+                       <input type="submit" value="submit" @click="search">
+                   </div>
+               </div>
+           </div> <!-- end row -->
 
+           <div class="row">
+               <div class="col-md-12" id="resultDiv">
+                   <!-- joke goes here
+                   <p><b>{{result.q}}</b></p>
+                   <p><i>{{result.a}}</i></p>-->
+                   <p>{{result.currently.summary}}</p>
+               </div>
+           </div> <!-- end row -->
+       </div> <!-- end container -->
+   </div> <!-- end #app -->
 
+   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+   <!--Put after vue.js-->
+   <script src="https://unpkg.com/@babel/polyfill@latest/dist/polyfill.min.js"></script>
+   <script src="https://unpkg.com/vue@latest/dist/vue.min.js"></script>
+   <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js"></script>
+
+   <script>
+
+       const app = new Vue({
+           el: '#app',
+           data: {
+               title: "Project 4",
+               result: "loading",
+               currentLat: '43.1566',
+               currentLong: '77.6088'
+           },
+           created() {
+               //this.search()
+           },
+           methods: {
+               search() {
+                   //console.log(limit);
+                   //if (! this.term.trim()) return;
+                   //https://cors-anywhere.herokuapp.com/api.openweathermap.org/data/2.5/find?q=London&appid=5e16c543219fc585e74c6275f9450fa5
+                   let url = "https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/605bcd829d90fb8c0a272b66244388e7/" + this.currentLat + "," + this.currentLong;
+                   console.log(url);
+                   fetch(url)
+                       .then(response => {
+                           if (!response.ok) {
+                               throw Error(`ERROR: ${response.statusText}`);
+                           }
+                           return response.json();
+                       })
+                       .then(json => {
+                           //console.log(json);
+                           this.result = json;
+                           console.log(this.result.latitude);
+                       })
+               } // end search
+           } // end methods
+       });
+
+       Vue.component('location-list', {
+           props: ['results'],
+           template: `<div>
+                   <p>Current Temperature: {{results.latitude}}</p>
+               </div>`
+       });
+
+   </script>
 </body>
 
 </html>
+<!--
+
+-->
+
