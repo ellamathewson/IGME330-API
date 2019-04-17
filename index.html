@@ -68,10 +68,8 @@
 
            <div class="row">
                <div class="col-md-12" id="resultDiv">
-                   <!-- joke goes here
-                   <p><b>{{result.q}}</b></p>
-                   <p><i>{{result.a}}</i></p>-->
-                   <p>{{result.currently.summary}}</p>
+                   <!-- COHEL PLEASE HELP if we try to print result.currentl-->
+                   <p>{{result.currently}}</p>
                </div>
            </div> <!-- end row -->
        </div> <!-- end container -->
@@ -114,7 +112,7 @@
                        .then(json => {
                            //console.log(json);
                            this.result = json;
-                           console.log(this.result.latitude);
+                           console.log(this.result.currently.temperature);
                        })
                } // end search
            } // end methods
@@ -123,7 +121,7 @@
        Vue.component('location-list', {
            props: ['results'],
            template: `<div>
-                   <p>Current Temperature: {{results.latitude}}</p>
+                   <p>Current Temperature: {{results.currently.temperature}}</p>
                </div>`
        });
 
