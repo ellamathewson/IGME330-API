@@ -1,4 +1,46 @@
+@import url('https://fonts.googleapis.com/css?family=El+Messiri');
+
+* {
+    scroll-behavior: smooth;
+    font-family: 'El Messiri', sans-serif;
+
+}
+
 h1 {
-    font-family: sans-serif;
-    color: blue;
+    color: white;
+}
+
+.introImage {
+    width: 100vw;
+    height: 100vh;
+}
+
+.mainContent {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin: 30%;
+    position: absolute;
+}
+
+.mainScreen {
+    position: relative;
+    text-align: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.centered {
+    position: absolute;
+}
+
+.secondScreen {
+    height: 90vh;
+}
+
+button {
+    border: none;
+    background-color: white;
+    color: purple;
+    position: absolute;
 }
