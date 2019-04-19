@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=El+Messiri');
 
-* {
+html {
     scroll-behavior: smooth;
     font-family: 'El Messiri', sans-serif;
 
@@ -19,7 +19,8 @@ h1 {
     display: flex;
     justify-content: center;
     align-content: center;
-    margin: 30%;
+    top: 50%;
+    left: 50%;
     position: absolute;
 }
 
@@ -32,15 +33,27 @@ h1 {
 
 .centered {
     position: absolute;
+    margin: 0 auto;
+    width: 10vw;
 }
 
 .secondScreen {
     height: 90vh;
 }
 
-button {
+#startButton {
     border: none;
     background-color: white;
     color: purple;
     position: absolute;
+    border-radius: 10px;
+    margin: 20vh 0;
+    padding: 1em;
+    color: white;
+    background-color: rgba(190, 144, 212,0.5);
+}
+
+#startButton:hover {
+    background-color: rgba(190, 144, 212,1);
+    text-decoration: none;
 }
