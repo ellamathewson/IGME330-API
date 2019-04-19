@@ -3,7 +3,7 @@
 html {
     scroll-behavior: smooth;
     font-family: 'El Messiri', sans-serif;
-
+    overflow-x: hidden;
 }
 
 h1 {
@@ -16,44 +16,113 @@ h1 {
 }
 
 .mainContent {
+    position: absolute;
     display: flex;
     justify-content: center;
     align-content: center;
-    top: 50%;
-    left: 50%;
-    position: absolute;
 }
 
-.mainScreen {
+#mainInput {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.65);
+    top: 20%;
+    left: 30%;
+    width: 40%;
+}
+
+.mainScreen, #scrollToSecond {
     position: relative;
     text-align: center;
     justify-content: center;
     height: 100vh;
 }
 
-.centered {
-    position: absolute;
-    margin: 0 auto;
-    width: 10vw;
-}
-
 .secondScreen {
-    height: 90vh;
+    height: 100vh;
 }
 
-#startButton {
+.btn {
     border: none;
     background-color: white;
     color: purple;
-    position: absolute;
     border-radius: 10px;
-    margin: 20vh 0;
     padding: 1em;
     color: white;
     background-color: rgba(190, 144, 212,0.5);
 }
 
-#startButton:hover {
+.btn:hover {
     background-color: rgba(190, 144, 212,1);
     text-decoration: none;
+    color: white;
+}
+
+
+
+
+.container {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    border-radius: 30px;
+}
+
+#longInput, #latInput {
+    margin: 0 15vw;
+    width: 150px;
+}
+
+#latInput {
+    margin-bottom: 5vh;
+}
+
+#longAndLat {
+    margin-bottom: 5vh;
+}
+
+
+
+
+/* ADAPTED FROM SED Innovations, https://sed.am, https://mkrtchyan.ga */
+
+@keyframes move-clouds-back {
+    from {background-position:0 0;}
+    to {background-position:10000px 0;}
+}
+@-webkit-keyframes move-clouds-back {
+    from {background-position:0 0;}
+    to {background-position:10000px 0;}
+}
+@-moz-keyframes move-clouds-back {
+    from {background-position:0 0;}
+    to {background-position:10000px 0;}
+}
+@-ms-keyframes move-clouds-back {
+    from {background-position: 0;}
+    to {background-position:10000px 0;}
+}
+
+.clouds {
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  width:100vw;
+  height:100vh;
+  display:block;
+}
+
+.clouds{
+    background:transparent url(http://www.script-tutorials.com/demos/360/images/clouds3.png) repeat top center;
+    z-index:3;
+
+  -moz-animation:move-clouds-back 200s linear infinite;
+  -ms-animation:move-clouds-back 200s linear infinite;
+  -o-animation:move-clouds-back 200s linear infinite;
+  -webkit-animation:move-clouds-back 200s linear infinite;
+  animation:move-clouds-back 200s linear infinite;
 }
