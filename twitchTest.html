@@ -14,44 +14,46 @@
 
 <body>
     <div class="mainScreen">
-        <content class="mainContent stars twinkling clouds">
-            <h1 class="centered">Star Finder</h1>
-            <a class="btn" href="#scrollToSecond">Begin</a>
+        <content class="mainContent clouds">
+            <div id="mainContentText">
+                <h1 class="centered">Star Finder</h1>
+                <a class="btn" href="#scrollToSecond">Begin</a>
+            </div>
         </content>
         <!--https://www.pexels.com/photo/stars-sky-night-galaxy-14676/-->
         <img class="introImage" src="starsTest.jpg">
     </div>
 
-    <div class="secondScreen" id="scrollToSecond">
-        <div id="app">
+    <div class="secondScreen clouds" id="scrollToSecond">
+            <div id="app" class="mainContentText">
 
-            <div class="container" id="mainInput">
-                <div class="row search-row">
-                    <div class="col-md-12">
-                        <div id="longAndLat">
-                            Longititude:<input type="text" v-model="currentLat" id="longInput">
-                            <br> Lattitude:
-                            <input type="text" v-model="currentLong" id="latInput"><br>
-                            <input type="submit" value="Submit" @click="search">
+                <div class="container" id="mainInput">
+                    <div class="row search-row">
+                        <div class="col-md-12">
+                            <div id="longAndLat">
+                                Longititude:<input type="text" v-model="currentLat" id="longInput">
+                                <br> Lattitude:
+                                <input type="text" v-model="currentLong" id="latInput"><br>
+                                <input type="submit" value="Submit" @click="search">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!-- end row -->
+                    <!-- end row -->
 
-                <div class="row">
-                    <div class="col-md-12" id="resultDiv" v-if="result.currently">
-                        <!-- COHEL PLEASE HELP if we try to print result.currentl-->
-                        <p>Temperature: {{result.currently.temperature}}</p>
-                        <p>Weather: {{result.currently.summary}}</p>
-                        <p>Cloud Cover: {{result.currently.cloudCover}}</p>
+                    <div class="row">
+                        <div class="col-md-12" id="resultDiv" v-if="result.currently">
+                            <!-- COHEL PLEASE HELP if we try to print result.currentl-->
+                            <p>Temperature: {{result.currently.temperature}}</p>
+                            <p>Weather: {{result.currently.summary}}</p>
+                            <p>Cloud Cover: {{result.currently.cloudCover}}</p>
+                        </div>
                     </div>
+                    <!-- end row -->
                 </div>
-                <!-- end row -->
             </div>
             <!-- end container -->
             <img class="introImage" src="starsTest.jpg">
         </div>
-    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
