@@ -24,23 +24,22 @@
         <img class="introImage" src="starsTest.jpg">
     </div>
 
-    <div class="secondScreen clouds" id="scrollToSecond">
-            <div id="app" class="mainContentText">
-
-                <div class="container" id="mainInput">
+    <div class="mainScreen" id="scrollToSecond">
+        <content class="mainContent clouds">
+            <div id="app">
+                <div class="container">
                     <div class="row search-row">
                         <div class="col-md-12">
-                            <div id="longAndLat">
-                                Longititude:<input type="text" v-model="currentLat" id="longInput">
-                                <br> Lattitude:
+                            <div>
+                                Longititude:<input type="text" v-model="currentLat" id="longInput"><br> Lattitude:
                                 <input type="text" v-model="currentLong" id="latInput"><br>
-                                <input type="submit" value="Submit" @click="search">
+                                <input class="btn" type="submit" value="Submit" @click="search" id="serachButton">
                             </div>
                         </div>
                     </div>
                     <!-- end row -->
 
-                    <div class="row">
+                    <div class="row" id="results">
                         <div class="col-md-12" id="resultDiv" v-if="result.currently">
                             <!-- COHEL PLEASE HELP if we try to print result.currentl-->
                             <p>Temperature: {{result.currently.temperature}}</p>
@@ -50,10 +49,13 @@
                     </div>
                     <!-- end row -->
                 </div>
+                <!-- end container -->
             </div>
-            <!-- end container -->
-            <img class="introImage" src="starsTest.jpg">
-        </div>
+            <!-- end #app -->
+        </content>
+        <!--https://www.pexels.com/photo/stars-sky-night-galaxy-14676/-->
+        <img class="introImage" src="starsTest.jpg">
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 

@@ -3,7 +3,7 @@
 html {
     scroll-behavior: smooth;
     font-family: 'El Messiri', sans-serif;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 h1 {
@@ -36,7 +36,8 @@ h1 {
     width: 40%;
 }
 
-.mainScreen, #scrollToSecond {
+.mainScreen,
+#scrollToSecond {
     position: relative;
     text-align: center;
     justify-content: center;
@@ -54,11 +55,11 @@ h1 {
     border-radius: 10px;
     padding: 1em;
     color: white;
-    background-color: rgba(190, 144, 212,0.5);
+    background-color: rgba(190, 144, 212, 0.5);
 }
 
 .btn:hover {
-    background-color: rgba(190, 144, 212,1);
+    background-color: rgba(190, 144, 212, 1);
     text-decoration: none;
     color: white;
 }
@@ -74,9 +75,13 @@ h1 {
     align-content: center;
     align-items: center;
     border-radius: 30px;
+    background-color: rgba(255, 255, 255, 0.75);
+    width: 35vw;
+    margin-top: 15%;
 }
 
-#longInput, #latInput {
+#longInput,
+#latInput {
     margin: 0 15vw;
     width: 150px;
 }
@@ -89,46 +94,71 @@ h1 {
     margin-bottom: 5vh;
 }
 
+#results {
+    margin-top: 2vh;
+}
+
+
+
 
 
 
 /* ADAPTED FROM SED Innovations, https://sed.am, https://mkrtchyan.ga */
 
 @keyframes move-clouds-back {
-    from {background-position:0 0;}
-    to {background-position:10000px 0;}
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 10000px 0;
+    }
 }
+
 @-webkit-keyframes move-clouds-back {
-    from {background-position:0 0;}
-    to {background-position:10000px 0;}
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 10000px 0;
+    }
 }
+
 @-moz-keyframes move-clouds-back {
-    from {background-position:0 0;}
-    to {background-position:10000px 0;}
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 10000px 0;
+    }
 }
+
 @-ms-keyframes move-clouds-back {
-    from {background-position: 0;}
-    to {background-position:10000px 0;}
+    from {
+        background-position: 0;
+    }
+    to {
+        background-position: 10000px 0;
+    }
 }
 
 .clouds {
-  position:absolute;
-  top:0;
-  left:0;
-  right:0;
-  bottom:0;
-  width:100vw;
-  height:100vh;
-  display:block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    display: block;
 }
 
-.clouds{
-    background:transparent url(http://www.script-tutorials.com/demos/360/images/clouds3.png) repeat top center;
-    z-index:3;
+.clouds {
+    background: transparent url(http://www.script-tutorials.com/demos/360/images/clouds3.png) repeat top center;
+    z-index: 3;
 
-  -moz-animation:move-clouds-back 200s linear infinite;
-  -ms-animation:move-clouds-back 200s linear infinite;
-  -o-animation:move-clouds-back 200s linear infinite;
-  -webkit-animation:move-clouds-back 200s linear infinite;
-  animation:move-clouds-back 200s linear infinite;
+    -moz-animation: move-clouds-back 200s linear infinite;
+    -ms-animation: move-clouds-back 200s linear infinite;
+    -o-animation: move-clouds-back 200s linear infinite;
+    -webkit-animation: move-clouds-back 200s linear infinite;
+    animation: move-clouds-back 200s linear infinite;
 }
