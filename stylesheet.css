@@ -3,7 +3,7 @@
 html {
     scroll-behavior: smooth;
     font-family: 'El Messiri', sans-serif;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 h1 {
