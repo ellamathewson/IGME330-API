@@ -85,7 +85,7 @@
             </div>
 
             <div class="row">
-                <div class="col-md-12" id="distanceDiv" v-if="result.moon_distance">
+                <div class="col-md-12" id="distanceDiv" v-if="geoResult.moon_distance">
 
                     <p>Moon Distnace: {{geoResult.moon_distance}}</p>
                     <p>Sun Distnace: {{geoResult.sun_distance}}</p>
@@ -179,7 +179,7 @@
                             })
                             .then(json => {
                                 //console.log(json);
-                                this.result = json;
+                                this.geoResult = json;
                                 console.log(JSON.stringify(json));
                             })
 
