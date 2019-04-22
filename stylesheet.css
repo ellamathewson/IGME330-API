@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=El+Messiri');
 
 html {
-    scroll-behavior: smooth;
     font-family: 'El Messiri', sans-serif;
     overflow-x: hidden;
 }
