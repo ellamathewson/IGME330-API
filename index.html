@@ -1,217 +1,203 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<!-- ff9fbf7c-4fe6-4c64-8322-251ec3d6b4d3 -->
 
 <head>
-    <meta charset="utf-8" />
-    <title>ugh</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
     <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css" />
+    <link rel="stylesheet" href="stylesheet.css">
 
-    <style>
-        /* .myheader grabbed from Bootstrap's jumbotron example - https://getbootstrap.com/docs/4.0/examples/jumbotron/ */
-
-        .myheader {
-            background-color: #e9ecef;
-            padding: 4rem 2rem;
-            margin-bottom: 2rem;
-        }
-
-        input.form-control {
-            display: inline-block;
-            width: 20rem;
-            margin-right: 1rem;
-        }
-
-        .search-row {
-            margin-bottom: 1rem;
-        }
-
-        .container {
-            margin: 0;
-        }
-
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            margin: 2rem;
-        }
-
-        td,
-        th {
-            border: 1px solid gold;
-            text-align: left;
-            padding: 8px;
-        }
-
-        tr:nth-child(even) {
-            background-color: #dddddd;
-        }
-    </style>
+    <title>Star Finder</title>
 </head>
 
 <body>
-    <div id="app">
-        <div class="myheader">
-            <h1 class="display-5">{{title}}</h1>
-        </div>
 
-        <div class="container">
-            <div class="row search-row">
-                <div class="col-md-12">
-                    <div>
-                        Longititude:<input type="text" v-model="currentLat"><br> Lattitude:
-                        <input type="text" v-model="currentLong"><br>
-                        <input type="submit" value="submit" @click="search(); geoLocation();">
+    <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyAibUl8D6kTXGhxO8xcCocygjRbyo712Wk",
+            authDomain: "starfinder-7daeb.firebaseapp.com",
+            databaseURL: "https://starfinder-7daeb.firebaseio.com",
+            projectId: "starfinder-7daeb",
+            storageBucket: "starfinder-7daeb.appspot.com",
+            messagingSenderId: "252674911376"
+        };
+        firebase.initializeApp(config);
+
+        console.log(firebase); // verify that firebase is loaded by logging the global it created for us
+
+        // #1 - get a reference to the databse
+        let database = firebase.database();
+
+        // #2 - refer to a root node named `scores`
+        let ref = database.ref('scores');
+
+        // #3 - create some data
+        let data = {
+            inputLat: '43.1566',
+            inputLong: '77.6088'
+        };
+
+        // #4 - send data, in this case we are adding it to the `scores` node
+        ref.push(data);
+
+    </script>
+
+
+    <div class="mainScreen">
+        <content class="mainContent clouds">
+            <div id="app">
+                <div class="container">
+                    <div class="row search-row">
+                        <div class="col-md-12">
+                            <h1 id="title">Star Finder</h1>
+                            <div>
+                                Longititude:<input type="text" v-model="currentLat" id="longInput"><br> Lattitude:
+                                <input type="text" v-model="currentLong" id="latInput"><br>
+                                <input class="btn" type="submit" value="Submit" @click="search(); geoLocation();" id="serachButton">
+                            </div>
+                        </div>
                     </div>
+                    <!-- end row -->
+
+                    <div class="row" id="results">
+                        <div class="col-md-12" id="resultDiv" v-if="result.currently">
+                            <!-- COHEL PLEASE HELP if we try to print result.currentl-->
+                            <p>Temperature: {{result.currently.temperature}}</p>
+                            <p>Weather: {{result.currently.summary}}</p>
+                            <p>Cloud Cover: {{result.currently.cloudCover}}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-12" id="distanceDiv" v-if="geoResult.moon_distance">
+                        <p>Moon Distnace: {{geoResult.moon_distance}}</p>
+                        <p>Sun Distnace: {{geoResult.sun_distance}}</p>
+                    </div>
+                    <!-- end row -->
                 </div>
+                <!-- end container -->
             </div>
-            <!-- end row -->
-
-            <div class="row">
-                <div class="col-md-12" id="resultDiv" v-if="result.currently">
-                    <!-- COHEL PLEASE HELP if we try to print result.currentl-->
-                    <p>Temperature: {{result.currently.temperature}}</p>
-                    <p>Weather: {{result.currently.summary}}</p>
-                    <p>Cloud Cover: {{result.currently.cloudCover}}</p>
-
-                </div>
-                <div class="col-md-12" id="distanceDiv" v-if="result.moon_distance">
-
-                    <p>Moon Distnace: {{geoResult.moon_distance}}</p>
-                    <p>Sun Distnace: {{geoResult.sun_distance}}</p>
-                </div>
-                <!-- end row -->
-            </div>
-
-            <div class="row">
-                <div class="col-md-12" id="distanceDiv" v-if="geoResult.moon_distance">
-
-                    <p>Moon Distnace: {{geoResult.moon_distance}}</p>
-                    <p>Sun Distnace: {{geoResult.sun_distance}}</p>
-                </div>
-                <!-- end row -->
-            </div>
-            <!-- end container -->
-        </div>
+            <!-- end #app -->
+        </content>
+        <!--https://www.pexels.com/photo/stars-sky-night-galaxy-14676/-->
+        <img class="introImage" src="starsTest.jpg">
     </div>
-        <!-- end #app -->
 
-        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
-        <!--Put after vue.js-->
-        <script src="https://unpkg.com/@babel/polyfill@latest/dist/polyfill.min.js"></script>
-        <script src="https://unpkg.com/vue@latest/dist/vue.min.js"></script>
-        <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js"></script>
+    <!--Put after vue.js-->
+    <script src="https://unpkg.com/@babel/polyfill@latest/dist/polyfill.min.js"></script>
+    <script src="https://unpkg.com/vue@latest/dist/vue.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js"></script>
 
-        <script>
-            const app = new Vue({
-                el: '#app',
-                data: {
-                    title: "Project 4",
-                    result: "loading",
-                    geoResult: "loading",
-                    currentLat: '43.1566',
-                    currentLong: '77.6088',
-                    Askey: "a54c0fb6b7947c6785acbbd4327d5dd437f87cc9",
-                    AsID: "dfedcd9c-19ac-4511-8be7-94fcbae1db09",
-                    AsDomain: "https://people.rit.edu",
-                    token: ""
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                title: "Project 4",
+                result: "loading",
+                geoResult: "loading",
+                currentLat: '43.1566',
+                currentLong: '77.6088',
+                Askey: "a54c0fb6b7947c6785acbbd4327d5dd437f87cc9",
+                AsID: "dfedcd9c-19ac-4511-8be7-94fcbae1db09",
+                AsDomain: "https://people.rit.edu",
+                token: ""
+            },
+            created() {
+                //this.search()
+            },
+            methods: {
+                search() {
+                    //console.log(limit);
+                    //if (! this.term.trim()) return;
+                    //https://cors-anywhere.herokuapp.com/api.openweathermap.org/data/2.5/find?q=London&appid=5e16c543219fc585e74c6275f9450fa5
+                    let url = "https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/605bcd829d90fb8c0a272b66244388e7/" + this.currentLat + "," + this.currentLong;
+                    console.log(url);
+                    fetch(url)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw Error(`ERROR: ${response.statusText}`);
+                            }
+                            return response.json();
+                        })
+                        .then(json => {
+                            //console.log(json);
+                            this.result = json;
+                            console.log(this.result.currently.temperature);
+                        })
+                }, // end search
+                astronomySearch() {
+                    let url = "https://api.astronomyapi.org/auth?app_id=" + this.AsID + "&app_secret=" + this.Askey;
+                    console.log(url);
+                    fetch(url, {
+                            headers: {
+                                "origin": "https://people.rit.edu"
+                            }
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw Error(`ERROR: ${response.statusText}`);
+                            }
+                            return response.json();
+                        })
+                        .then(json => {
+                            //console.log(json);
+                            this.token = json.token;
+                            this.astronomyPull();
+                        })
                 },
-                created() {
-                    //this.search()
+                astronomyPull() {
+                    let url = "https://api.astronomyapi.org/";
+                    console.log(url);
+                    fetch(url, {
+                            headers: {
+                                "Authorization": "Bearer " + this.token,
+                                'X-Requested-With': 'XMLHttpRequest'
+                            }
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw Error(`ERROR: ${response.statusText}`);
+                            }
+                            return response.json();
+                        })
+                        .then(json => {
+                            //console.log(json);
+                            this.geoResult = json;
+                            console.log(JSON.stringify(json));
+                        })
                 },
-                methods: {
-                    search() {
-                        //console.log(limit);
-                        //if (! this.term.trim()) return;
-                        //https://cors-anywhere.herokuapp.com/api.openweathermap.org/data/2.5/find?q=London&appid=5e16c543219fc585e74c6275f9450fa5
-                        let url = "https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/605bcd829d90fb8c0a272b66244388e7/" + this.currentLat + "," + this.currentLong;
-                        console.log(url);
-                        fetch(url)
-                            .then(response => {
-                                if (!response.ok) {
-                                    throw Error(`ERROR: ${response.statusText}`);
-                                }
-                                return response.json();
-                            })
-                            .then(json => {
-                                //console.log(json);
-                                this.result = json;
-                                console.log(this.result.currently.temperature);
-                            })
-                    }, // end search
-                    astronomySearch() {
-                        let url = "https://api.astronomyapi.org/auth?app_id=" + this.AsID + "&app_secret=" + this.Askey;
-                        console.log(url);
-                        fetch(url, {
-                                headers: {
-                                    "origin": "https://people.rit.edu"
-                                }
-                            })
-                            .then(response => {
-                                if (!response.ok) {
-                                    throw Error(`ERROR: ${response.statusText}`);
-                                }
-                                return response.json();
-                            })
-                            .then(json => {
-                                //console.log(json);
+                geoLocation() {
+                    let url = "https://api.ipgeolocation.io/astronomy?apiKey=99a7a2ef78ff4e2193dda6c3bd1af8c5&lat=" + this.currentLat + "&long=" + this.currentLong;
+                    console.log(url);
+                    fetch(url)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw Error(`ERROR: ${response.statusText}`);
+                            }
+                            return response.json();
+                        })
+                        .then(json => {
+                            //console.log(json);
+                            this.geoResult = json;
+                            console.log(JSON.stringify(json));
+                            console.log(this.geoResult.sun_distance);
+                            console.log(this.geoResult.moon_distance);
+                            //console.log(this.result.currently.temperature);
+                        })
+                } //end of search
+            } // end methods
+        });
 
-                                this.token = json.token;
-                                this.astronomyPull();
-                            })
-                    },
-                    astronomyPull() {
-                        let url = "https://api.astronomyapi.org/";
-                        console.log(url);
-                        fetch(url, {
-                                headers: {
-                                    "Authorization": "Bearer " + this.token,
-                                    'X-Requested-With': 'XMLHttpRequest'
-                                }
-                            })
-                            .then(response => {
-                                if (!response.ok) {
-                                    throw Error(`ERROR: ${response.statusText}`);
-                                }
-                                return response.json();
-                            })
-                            .then(json => {
-                                //console.log(json);
-                                this.geoResult = json;
-                                console.log(JSON.stringify(json));
-                            })
+    </script>
 
-                    },
-                    geoLocation() {
-                        let url = "https://api.ipgeolocation.io/astronomy?apiKey=99a7a2ef78ff4e2193dda6c3bd1af8c5&lat=" + this.currentLat + "&long=" + this.currentLong;
-                        console.log(url);
-                        fetch(url)
-                            .then(response => {
-                                if (!response.ok) {
-                                    throw Error(`ERROR: ${response.statusText}`);
-                                }
-                                return response.json();
-                            })
-                            .then(json => {
-                                //console.log(json);
-                                this.geoResult = json;
-                                console.log(JSON.stringify(json));
-                                console.log(this.geoResult.sun_distance);
-                                console.log(this.geoResult.moon_distance);
-                                //console.log(this.result.currently.temperature);
-                            })
+    <script>
+    </script>
 
-
-                    } //end of search
-                } // end methods
-            });
-        </script>
 </body>
 
 </html>
-<!--
-
--->
-
