@@ -16,36 +16,6 @@
 <body>
 
     <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase.js"></script>
-    <script>
-        // Initialize Firebase
-        var config = {
-            apiKey: "AIzaSyAibUl8D6kTXGhxO8xcCocygjRbyo712Wk",
-            authDomain: "starfinder-7daeb.firebaseapp.com",
-            databaseURL: "https://starfinder-7daeb.firebaseio.com",
-            projectId: "starfinder-7daeb",
-            storageBucket: "starfinder-7daeb.appspot.com",
-            messagingSenderId: "252674911376"
-        };
-        firebase.initializeApp(config);
-
-        console.log(firebase); // verify that firebase is loaded by logging the global it created for us
-
-        // #1 - get a reference to the databse
-        let database = firebase.database();
-
-        // #2 - refer to a root node named `scores`
-        let ref = database.ref('scores');
-
-        // #3 - create some data
-        let data = {
-            inputLat: '43.1566',
-            inputLong: '77.6088'
-        };
-
-        // #4 - send data, in this case we are adding it to the `scores` node
-        ref.push(data);
-
-    </script>
 
 
     <div class="mainScreen">
@@ -94,6 +64,7 @@
     <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js"></script>
 
     <script>
+       
         const app = new Vue({
             el: '#app',
             data: {
@@ -105,10 +76,40 @@
                 Askey: "a54c0fb6b7947c6785acbbd4327d5dd437f87cc9",
                 AsID: "dfedcd9c-19ac-4511-8be7-94fcbae1db09",
                 AsDomain: "https://people.rit.edu",
-                token: ""
+                token: "",
+                database:""
             },
             created() {
                 //this.search()
+                   // Initialize Firebase
+                var config = {
+                    apiKey: "AIzaSyAibUl8D6kTXGhxO8xcCocygjRbyo712Wk",
+                    authDomain: "starfinder-7daeb.firebaseapp.com",
+                    databaseURL: "https://starfinder-7daeb.firebaseio.com",
+                    projectId: "starfinder-7daeb",
+                    storageBucket: "starfinder-7daeb.appspot.com",
+                    messagingSenderId: "252674911376"
+                };
+                firebase.initializeApp(config);
+
+                console.log(firebase); // verify that firebase is loaded by logging the global it created for us
+                    
+                // #1 - get a reference to the databse
+                this.database = firebase.database();
+                    
+                // #2 - refer to a root node named `scores`
+                let ref = this.database.ref('scores');
+                
+                    
+                    
+                // #3 - create some data
+                let data = {
+                    inputLat: '43.1566',
+                    inputLong: '77.6088'
+                };
+            
+                // #4 - send data, in this case we are adding it to the `scores` node
+                ref.push(data);
             },
             methods: {
                 search() {
@@ -172,6 +173,7 @@
                         })
                 },
                 geoLocation() {
+                    let ref = this.database.ref('geoLocations');
                     let url = "https://api.ipgeolocation.io/astronomy?apiKey=99a7a2ef78ff4e2193dda6c3bd1af8c5&lat=" + this.currentLat + "&long=" + this.currentLong;
                     console.log(url);
                     fetch(url)
@@ -184,9 +186,12 @@
                         .then(json => {
                             //console.log(json);
                             this.geoResult = json;
+                           
                             console.log(JSON.stringify(json));
                             console.log(this.geoResult.sun_distance);
                             console.log(this.geoResult.moon_distance);
+
+                            ref.push(this.geoResult);                            
                             //console.log(this.result.currently.temperature);
                         })
                 } //end of search
