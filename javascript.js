@@ -1,3 +1,13 @@
+//Media query
+//fix lat and long weird glitch at big size
+
+//check for strings
+
+//find out what mvvm framework is
+
+//validate html and css
+
+
 const app = new Vue({
             el: '#app',
             data: {
