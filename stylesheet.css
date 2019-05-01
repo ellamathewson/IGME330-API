@@ -162,3 +162,13 @@ h1 {
     -webkit-animation: move-clouds-back 200s linear infinite;
     animation: move-clouds-back 200s linear infinite;
 }
+
+.fas {
+    font-size: 20px;
+}
+
+@media screen and (max-width: 825px) {
+    .container {
+        width: 80%;
+    }
+}

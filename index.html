@@ -11,7 +11,9 @@
     <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css"/>
 
     <link rel="stylesheet" href="stylesheet.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+
 
 
 
@@ -30,7 +32,7 @@
                 <div class="container">
                     <div class="row search-row">
                         <div class="col-md-12">
-                            <h1 id="title">Weather or not you can see the moon</h1>
+                            <h1 id="title">Weather or not</h1>
                             <div>
                                 <p id="Error" v-show="inputError">Please input a number in both boxes</p>
                                 Longititude:<input type="text" v-model="position.lat" id="longInput" ><br> Lattitude:
@@ -47,14 +49,14 @@
                     <div class="row" id="results">
                         <div class="col-md-12" id="resultDiv" v-if="result.currently">
                             <!-- COHEL PLEASE HELP if we try to print result.currentl-->
-                            <p>Temperature: {{result.currently.temperature}}</p>
-                            <p>Weather: {{result.currently.summary}}</p>
-                            <p>Cloud Cover: {{result.currently.cloudCover}}</p>
+                            <p><i class="fas fa-thermometer-three-quarters"></i> Temperature: {{result.currently.temperature}}</p>
+                            <p><i class="fas fa-cloud-rain"></i> Weather: {{result.currently.summary}}</p>
+                            <p><i class="fas fa-cloud-sun"></i> Cloud Cover: {{result.currently.cloudCover}}</p>
                         </div>
                     </div>
                     <div class="col-md-12" id="distanceDiv" v-if="geoResult.moon_distance">
-                        <p>Moon Distnace: {{geoResult.moon_distance}}</p>
-                        <p>Sun Distnace: {{geoResult.sun_distance}}</p>
+                        <p><i class="fas fa-moon"></i> Moon Distnace: {{geoResult.moon_distance}}</p>
+                        <p><i class="fas fa-sun"></i> Sun Distnace: {{geoResult.sun_distance}}</p>
                     </div>
                     </div>
                     <!-- end row -->
