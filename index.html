@@ -37,6 +37,15 @@
                                 <p id="Error" v-show="inputError">Please input a number in both boxes</p>
                                 Longititude:<input type="text" v-model="position.lat" id="longInput" ><br> Lattitude:
                                 <input type="text" v-model="position.long" id="latInput"><br>
+                                Results:
+                                <select>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                                <br><br>
                                 <input class="btn" type="submit" value="Submit" @click="check(); search(); geoLocation(); " id="serachButton" >
                             </div>
                         </div>
