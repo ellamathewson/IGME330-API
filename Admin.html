@@ -15,7 +15,12 @@
     <div id="app">
             <div class="container">
                 <h1>{{title}}</h1>
-                <ul id="geo data"><li v-for="item in database">{{item.date}}</li></ul>
+                <ul id="geo data">
+                    <h2>Moon Distance</h2>
+                    <li v-for="(item, index) of Object.keys(database)" v-if="index < indexNum">{{database[item].moon_distance}}</li>
+                    <h2>Sun Distance</h2>
+                    <li v-for="item in database">{{item.sun_distance}}</li>
+                </ul>
             </div>
         </div>
 
@@ -33,7 +38,8 @@
         el: '#app',
         data: {
             database:{ },
-            title:"GeoData"
+            title:"GeoData",
+            indexNum: 9
         },
         created(){
              /* #2 - The rest of the Firebase setup code goes here */
@@ -67,6 +73,7 @@
                 firebase.database().ref("geoLocations").once("value").then(function(data){
                     console.log(data.val());
                     this.database = (data.val());
+
                  }.bind(app));
             }
         }

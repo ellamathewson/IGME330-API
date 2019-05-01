@@ -32,15 +32,16 @@
                         <div class="col-md-12">
                             <h1 id="title">Weather or not you can see the moon</h1>
                             <div>
-                                Longititude:<input type="text" v-model="currentLat" id="longInput"><br> Lattitude:
-                                <input type="text" v-model="currentLong" id="latInput"><br>
-                                <input class="btn" type="submit" value="Submit" @click="search(); geoLocation();" id="serachButton">
+                                <p id="Error" v-show="inputError">Please input a number in both boxes</p>
+                                Longititude:<input type="text" v-model="position.lat" id="longInput" ><br> Lattitude:
+                                <input type="text" v-model="position.long" id="latInput"><br>
+                                <input class="btn" type="submit" value="Submit" @click="check(); search(); geoLocation(); " id="serachButton" >
                             </div>
                         </div>
                     </div>
                     <!-- end row -->
 
-                    <i id="load" class="fa fa-circle-o-notch fa-spin"></i>
+                    <!-- <i id="load" class="fa fa-circle-o-notch fa-spin"></i> -->
 
                     <div id="allResults">
                     <div class="row" id="results">
