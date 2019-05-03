@@ -25,7 +25,7 @@ const app = new Vue({
                 token: "",
                 database: "",
                 inputError: false,
-                position: new Position(43.1566,77.6088) 
+                position: new Position(43.1566,-77.6088)
             },
             created() {
                 //this.search()
@@ -51,7 +51,7 @@ const app = new Vue({
                 // #3 - create some data
                 let data = {
                     inputLat: '43.1566',
-                    inputLong: '77.6088'
+                    inputLong: '-77.6088'
                 };
 
                 // #4 - send data, in this case we are adding it to the `scores` node
