@@ -48,8 +48,6 @@ const app = new Vue({
                 // #2 - refer to a root node named `scores`
                 let ref = this.database.ref('scores');
 
-
-
                 // #3 - create some data
                 let data = {
                     inputLat: '43.1566',
@@ -65,6 +63,7 @@ const app = new Vue({
                     //if (! this.term.trim()) return;
                     //https://cors-anywhere.herokuapp.com/api.openweathermap.org/data/2.5/find?q=London&appid=5e16c543219fc585e74c6275f9450fa5
                     if(this.inputError){
+                        //this.reset();
                         return
                     }
                     let url = "https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/605bcd829d90fb8c0a272b66244388e7/" + this.position.lat + "," + this.position.long;
@@ -125,6 +124,7 @@ const app = new Vue({
                 },
                 geoLocation() {
                     if(this.inputError){
+                        //this.reset();
                         return
                     }
                     let ref = this.database.ref('geoLocations');
@@ -153,27 +153,19 @@ const app = new Vue({
                     
                     if(isNaN(this.position.lat) || isNaN(this.position.long)){
                         this.inputError = true;
-                    }else{
-                        this.inputError = false;
+                        //this.reset();
+                        console.log("not a number");
                     }
-                    
-                    if(this.position.lat == "" || this.position.long == ""){
+                    else if(this.position.lat == "" || this.position.long == ""){
                         this.inputError = true;
                     }else{
                         this.inputError = false;
                     }
 
-                } //end of search
+
+                }, //end of search
+                reset() {
+                    alert(this.position.lat + ", " + this.position.long + " is not a valid input");
+                }
             } // end methods
         });
-
-
-// $("#load").hide();
-
-// $(".btn").click(function() {
-//     $("#load").show();
-//     $("#allResults").ready(function() {
-//         $("#allResults").show();
-//         $("#load").hide();
-//     });
-// })
